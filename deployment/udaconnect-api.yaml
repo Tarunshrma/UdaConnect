@@ -33,7 +33,7 @@ spec:
       containers:
       - image: tarunshrma/udaconnect-api:latest
         name: udaconnect-api
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         env:
         - name: DB_USERNAME
           valueFrom:
