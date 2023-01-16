@@ -15,7 +15,7 @@ logger = logging.getLogger("udaconnect-api")
 class ConnectionService:
     @staticmethod
     def find_contacts(person_id: int, start_date: datetime, end_date: datetime, meters=5
-    ) -> List[Connection]:
+                      ) -> List[Connection]:
         """
         Finds all Person who have been within a given distance of a given Person within a date range.
 
@@ -23,14 +23,22 @@ class ConnectionService:
         large datasets. This is by design: what are some ways or techniques to help make this data integrate more
         smoothly for a better user experience for API consumers?
         """
-        locations: List = db.session.query(Location).filter(
+
+        """
+        Fetch the all the locations of user...
+        """
+        locations: List = db.session.query(Location
+                                           ).filter(
             Location.person_id == person_id
-        ).filter(Location.creation_time < end_date).filter(
+        ).filter(
+            Location.creation_time < end_date
+        ).filter(
             Location.creation_time >= start_date
         ).all()
 
         # Cache all users in memory for quick lookup
-        person_map: Dict[str, Person] = {person.id: person for person in PersonService.retrieve_all()}
+        person_map: Dict[str, Person] = {
+            person.id: person for person in PersonService.retrieve_all()}
 
         # Prepare arguments for queries
         data = []
@@ -98,13 +106,15 @@ class LocationService:
     def create(location: Dict) -> Location:
         validation_results: Dict = LocationSchema().validate(location)
         if validation_results:
-            logger.warning(f"Unexpected data format in payload: {validation_results}")
+            logger.warning(
+                f"Unexpected data format in payload: {validation_results}")
             raise Exception(f"Invalid payload: {validation_results}")
 
         new_location = Location()
         new_location.person_id = location["person_id"]
         new_location.creation_time = location["creation_time"]
-        new_location.coordinate = ST_Point(location["latitude"], location["longitude"])
+        new_location.coordinate = ST_Point(
+            location["latitude"], location["longitude"])
         db.session.add(new_location)
         db.session.commit()
 
