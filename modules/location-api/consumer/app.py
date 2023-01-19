@@ -7,8 +7,8 @@ logger = logging.getLogger("udaconnect-location-api")
 
 
 TOPIC_NAME = 'location'
-KAFKA_SERVER = '146.190.34.54:30407'
-kafka_consumer = KafkaConsumer(TOPIC_NAME,bootstrap_servers=KAFKA_SERVER)
+KAFKA_SERVER = 'my-release-kafka.default.svc.cluster.local:9092'
+kafka_consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=KAFKA_SERVER)
 
 
 while True:

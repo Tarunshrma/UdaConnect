@@ -1,0 +1,20 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "location-api-consumer"
+  namespace: "default"
+  labels:
+    app: "location-api-consumer"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "location-api-consumer"
+  template:
+    metadata:
+      labels:
+        app: "location-api-consumer"
+    spec:
+      containers:
+      - name: "location-api-consumer"
+        image: tarunshrma/udaconnect-location-consumer:latest
