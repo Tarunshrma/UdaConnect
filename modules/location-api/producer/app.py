@@ -28,7 +28,7 @@ def health():
 def locations():
     request_body = request.json
     kafka_data = json.dumps(request_body).encode()
-    kafka_producer.send(TOPIC_NAME, "locations", kafka_data)
+    kafka_producer.send(TOPIC_NAME, kafka_data)
     kafka_producer.flush()
 
     logger.info(
