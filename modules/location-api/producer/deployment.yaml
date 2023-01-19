@@ -30,9 +30,9 @@ metadata:
 spec:
   ports:
   - protocol: "TCP"
-    port: 80
+    port: 9092
     targetPort: 5000
   selector:
     app: "flask"
-  type: "LoadBalancer"
-  loadBalancerIP: ""
+  type: "NodePort"
+
