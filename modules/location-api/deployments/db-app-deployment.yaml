@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: "location-db-app"
-        image: tarunshrma/udaconnect-location-db-app:0.0.10
+        image: tarunshrma/udaconnect-location-db-app:0.0.11
         imagePullPolicy: IfNotPresent
         env:
         - name: DB_USERNAME

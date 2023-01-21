@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify
 
 db = SQLAlchemy()
+db_service = LocationDBService
 
 DB_USERNAME = os.environ["DB_USERNAME"]
 DB_PASSWORD = os.environ["DB_PASSWORD"]
