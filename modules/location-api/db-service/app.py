@@ -9,7 +9,6 @@ import logging
 # from flask_sqlalchemy import SQLAlchemy
 # from flask import Flask, jsonify
 from config import create_app
-from service import LocationDBService
 
 # db = SQLAlchemy()
 
@@ -19,6 +18,8 @@ logger = logging.getLogger("udaconnect-location-db-app")
 
 class LocationServicer(location_data_pb2_grpc.LocationServiceServicer):
     def SaveLocation(self, request, context):
+        from service import LocationDBService
+
         request_value = {
             "person_id": int(request.person_id),
             "creation_time": request.creation_time,
