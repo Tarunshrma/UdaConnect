@@ -75,7 +75,7 @@ spec:
           - name: POSTGRES_DB
             valueFrom:
               configMapKeyRef:
-                name: db-person-map
+                name: app-location-map
                 key: DB_NAME
           volumeMounts:
             - mountPath: /var/lib/locationdb/data
