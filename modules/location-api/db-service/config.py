@@ -1,6 +1,11 @@
 import os
 from typing import List, Type
 
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify
+
+db = SQLAlchemy()
+
 DB_USERNAME = os.environ["DB_USERNAME"]
 DB_PASSWORD = os.environ["DB_PASSWORD"]
 DB_HOST = os.environ["DB_HOST"]
@@ -56,3 +61,10 @@ EXPORT_CONFIGS: List[Type[BaseConfig]] = [
     ProductionConfig,
 ]
 config_by_name = {cfg.CONFIG_NAME: cfg for cfg in EXPORT_CONFIGS}
+
+
+def create_app(env=None):
+    app = Flask(__name__)
+    app.config.from_object(config_by_name["dev"])
+    db.init_app(app)
+    return app

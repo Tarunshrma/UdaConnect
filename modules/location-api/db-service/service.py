@@ -3,7 +3,8 @@ from schema import LocationSchema
 from models import Location
 from typing import Dict
 from geoalchemy2.functions import ST_AsText, ST_Point
-from app import db
+# from app import db
+from config import db
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-db-app")

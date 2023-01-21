@@ -6,19 +6,15 @@ import location_data_pb2
 import location_data_pb2_grpc
 import logging
 
-from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, jsonify
-from config import config_by_name
+# from flask_sqlalchemy import SQLAlchemy
+# from flask import Flask, jsonify
+from config import create_app
 from service import LocationDBService
 
-db = SQLAlchemy()
+# db = SQLAlchemy()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-db-app")
-
-app = Flask(__name__)
-app.config.from_object(config_by_name["dev"])
-db.init_app(app)
 
 
 class LocationServicer(location_data_pb2_grpc.LocationServiceServicer):
@@ -43,6 +39,7 @@ location_data_pb2_grpc.add_LocationServiceServicer_to_server(
 
 logger.info("Location db service starting on port 5005...")
 server.add_insecure_port("[::]:5005")
+create_app()
 server.start()
 # Keep thread alive
 try:
