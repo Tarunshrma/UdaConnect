@@ -24,6 +24,7 @@ class LocationDBService:
 
     @staticmethod
     def create(location: Dict) -> Location:
+        logger.info("TESTING>>>>>>>>>>")
         validation_results: Dict = LocationSchema().validate(location)
         if validation_results:
             logger.warning(
