@@ -1,5 +1,6 @@
 import os
 from typing import List, Type
+from service import LocationDBService
 
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify
