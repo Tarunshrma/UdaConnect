@@ -1,4 +1,5 @@
 from marshmallow import Schema, fields
+from models import Location
 
 
 class LocationSchema(Schema):
