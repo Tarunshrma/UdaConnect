@@ -10,8 +10,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify
 from config import config_by_name
 
-import service
-
 db = SQLAlchemy()
 
 logging.basicConfig(level=logging.INFO)
@@ -24,6 +22,7 @@ db.init_app(app)
 
 class LocationServicer(location_data_pb2_grpc.LocationServiceServicer):
     def SaveLocation(self, request, context):
+        import service
 
         request_value = {
             "person_id": int(request.person_id),
