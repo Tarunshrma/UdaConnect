@@ -4,6 +4,10 @@ from concurrent import futures
 import grpc
 import location_data_pb2
 import location_data_pb2_grpc
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("udaconnect-location-db-app")
 
 
 class LocationServicer(location_data_pb2_grpc.LocationServiceServicer):
@@ -15,7 +19,7 @@ class LocationServicer(location_data_pb2_grpc.LocationServiceServicer):
             "latitude": request.latitude,
             "longitude": request.longitude,
         }
-        print(f"Saving location data {request_value} to database")
+        logger.info(f"Saving location data {request_value} to database")
 
         return location_data_pb2.LocationData(**request_value)
 
@@ -26,7 +30,7 @@ location_data_pb2_grpc.add_LocationServiceServicer_to_server(
     LocationServicer(), server)
 
 
-print("Location db service starting on port 5005...")
+logger.info("Location db service starting on port 5005...")
 server.add_insecure_port("[::]:5005")
 server.start()
 # Keep thread alive

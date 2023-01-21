@@ -17,7 +17,7 @@ kafka_consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=KAFKA_SERVER)
 
 
 def send_to_location_db_service(location_message):
-    print("Sending location data to db grpc service")
+    logger.info("Sending location data to db grpc service")
     channel = grpc.insecure_channel(DB_SERVICE_URL)
     stub = location_data_pb2_grpc.LocationServiceStub(channel)
 
@@ -28,6 +28,7 @@ def send_to_location_db_service(location_message):
         longitude=location_message["longitude"],
     )
     response = stub.SaveLocation(item)
+    logger.info(f"{response} saved to db")
 
 
 while True:
