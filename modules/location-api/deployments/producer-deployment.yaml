@@ -18,7 +18,7 @@ spec:
       containers:
       - name: "flask"
         image: tarunshrma/udaconnect-location-producer:0.0.1
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
 
 ---
 apiVersion: "v1"
