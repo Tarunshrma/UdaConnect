@@ -18,3 +18,4 @@ spec:
       containers:
       - name: "location-api-consumer"
         image: tarunshrma/udaconnect-location-consumer:latest
+        imagePullPolicy: "IfNotPresent"
