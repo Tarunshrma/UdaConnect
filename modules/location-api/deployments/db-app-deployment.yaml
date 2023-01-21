@@ -1,0 +1,63 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "location-db-app"
+  namespace: "default"
+  labels:
+    app: "location-db-app"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "location-db-app"
+  template:
+    metadata:
+      labels:
+        app: "location-db-app"
+    spec:
+      containers:
+      - name: "location-db-app"
+        image: tarunshrma/udaconnect-location-db-app:0.0.2
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-location-secret
+              key: DB_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_NAME
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_PORT
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "location-db-service"
+  namespace: "default"
+  labels:
+    app: "location-db-app"
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 5005
+    targetPort: 5005
+  selector:
+    app: "location-db-app"
+  type: ClusterIP

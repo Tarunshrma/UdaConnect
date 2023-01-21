@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  DB_USERNAME: "tarun"
+  DB_NAME: "db_location"
+  DB_HOST: "postgres-location"
+  DB_PORT: "5432"
+metadata:
+  name: app-location-map

@@ -6,8 +6,19 @@ import location_data_pb2
 import location_data_pb2_grpc
 import logging
 
+from service import LocationService
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify
+from config import config_by_name
+
+db = SQLAlchemy()
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-db-app")
+
+app = Flask(__name__)
+app.config.from_object(config_by_name["dev"])
+db.init_app(app)
 
 
 class LocationServicer(location_data_pb2_grpc.LocationServiceServicer):
@@ -20,6 +31,7 @@ class LocationServicer(location_data_pb2_grpc.LocationServiceServicer):
             "longitude": request.longitude,
         }
         logger.info(f"Saving location data {request_value} to database")
+        LocationService.create(request_value)
 
         return location_data_pb2.LocationData(**request_value)
 
