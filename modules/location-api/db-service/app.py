@@ -6,10 +6,11 @@ import location_data_pb2
 import location_data_pb2_grpc
 import logging
 
-from service import LocationService
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify
 from config import config_by_name
+
+import service
 
 db = SQLAlchemy()
 
@@ -31,7 +32,7 @@ class LocationServicer(location_data_pb2_grpc.LocationServiceServicer):
             "longitude": request.longitude,
         }
         logger.info(f"Saving location data {request_value} to database")
-        LocationService.create(request_value)
+        service.LocationDBService.create(request_value)
 
         return location_data_pb2.LocationData(**request_value)
 

@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-db-app")
 
 
-class LocationService:
+class LocationDBService(object):
     @staticmethod
     def retrieve(location_id) -> Location:
         location, coord_text = (
