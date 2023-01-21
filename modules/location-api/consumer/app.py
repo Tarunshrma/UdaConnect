@@ -12,12 +12,13 @@ logger = logging.getLogger("udaconnect-location-api")
 
 TOPIC_NAME = 'location'
 KAFKA_SERVER = 'my-release-kafka.default.svc.cluster.local:9092'
+DB_SERVICE_URL = "location-db-service:5005"
 kafka_consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=KAFKA_SERVER)
 
 
 def send_to_location_db_service(location_message):
     print("Sending location data to db grpc service")
-    channel = grpc.insecure_channel("localhost:5005")
+    channel = grpc.insecure_channel(DB_SERVICE_URL)
     stub = location_data_pb2_grpc.LocationServiceStub(channel)
 
     item = location_data_pb2.LocationData(
