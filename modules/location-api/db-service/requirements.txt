@@ -23,8 +23,8 @@ pyrsistent
 python-dateutil
 pytz
 six
-shapely
 SQLAlchemy
 Werkzeug
 flask-restx
 requests
+shapely==1.7.0
