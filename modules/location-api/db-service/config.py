@@ -67,7 +67,9 @@ db = SQLAlchemy()
 
 
 def create_app(env=None):
-    # with app.app_context():
     app.config.from_object(config_by_name["dev"])
     db.init_app(app)
+    with app.app_context():
+        db.create_all()
+        db.session.commit()
     return app
