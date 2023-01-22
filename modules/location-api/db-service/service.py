@@ -1,7 +1,7 @@
 import logging
 from schema import LocationSchema
 from models import Location
-from typing import Dict
+from typing import Dict, List
 from geoalchemy2.functions import ST_AsText, ST_Point
 # from app import db
 from config import db
@@ -11,6 +11,11 @@ logger = logging.getLogger("udaconnect-location-db-app")
 
 
 class LocationDBService:
+    @staticmethod
+    def retrieve_all() -> List[Location]:
+        locations = db.session.query(Location).all()
+        return locations
+
     @staticmethod
     def retrieve(location_id) -> Location:
         location, coord_text = (
@@ -25,7 +30,6 @@ class LocationDBService:
 
     @staticmethod
     def create(location: Dict) -> Location:
-        logger.info("TESTING>>>>>>>>>>")
         validation_results: Dict = LocationSchema().validate(location)
         if validation_results:
             logger.warning(
