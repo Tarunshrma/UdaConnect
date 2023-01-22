@@ -2,7 +2,7 @@ import os
 from typing import List, Type
 
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, jsonify
+from flask import Flask, current_app
 
 db = SQLAlchemy()
 # db_service = LocationDBService
@@ -66,6 +66,7 @@ config_by_name = {cfg.CONFIG_NAME: cfg for cfg in EXPORT_CONFIGS}
 
 def create_app(env=None):
     app = Flask(__name__)
-    app.config.from_object(config_by_name["dev"])
-    db.init_app(app)
-    return app
+    with app.app_context():
+        app.config.from_object(config_by_name["dev"])
+        db.init_app(app)
+        return app
