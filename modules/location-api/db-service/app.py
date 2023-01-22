@@ -10,8 +10,8 @@ import logging
 # from flask import Flask, jsonify
 # from config import LocationDBService
 # from service import LocationDBService
-import config
-
+# import config
+from service import LocationDBService
 # db = SQLAlchemy()
 
 logging.basicConfig(level=logging.INFO)
@@ -28,7 +28,7 @@ class LocationServicer(location_data_pb2_grpc.LocationServiceServicer):
             "longitude": request.longitude,
         }
         logger.info(f"Saving location data {request_value} to database")
-        config.db_service.create(request_value)
+        LocationDBService.create(request_value)
 
         return location_data_pb2.LocationData(**request_value)
 
@@ -41,7 +41,7 @@ location_data_pb2_grpc.add_LocationServiceServicer_to_server(
 
 logger.info("Location db service starting on port 5005...")
 server.add_insecure_port("[::]:5005")
-config.create_app()
+# config.create_app()
 server.start()
 # Keep thread alive
 try:
