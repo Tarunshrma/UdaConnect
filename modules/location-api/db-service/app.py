@@ -12,6 +12,7 @@ import logging
 # from service import LocationDBService
 # import config
 from service import LocationDBService
+from config import create_app
 # db = SQLAlchemy()
 
 logging.basicConfig(level=logging.INFO)
@@ -41,7 +42,7 @@ location_data_pb2_grpc.add_LocationServiceServicer_to_server(
 
 logger.info("Location db service starting on port 5005...")
 server.add_insecure_port("[::]:5005")
-# config.create_app()
+create_app()
 server.start()
 # Keep thread alive
 try:
