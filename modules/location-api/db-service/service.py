@@ -37,7 +37,7 @@ class LocationDBService:
         new_location.creation_time = location["creation_time"]
         new_location.coordinate = ST_Point(
             location["latitude"], location["longitude"])
-        g_app.session.add(new_location)
-        g_app.session.commit()
+        db.session.add(new_location)
+        db.session.commit()
 
         return new_location
