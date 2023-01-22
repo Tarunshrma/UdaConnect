@@ -8,10 +8,10 @@ from geoalchemy2.shape import to_shape
 from shapely.geometry.point import Point
 from sqlalchemy import BigInteger, Column, DateTime, Integer, String
 from sqlalchemy.ext.hybrid import hybrid_property
-from config import g_app
+from config import db
 
 
-class Location(g_app.Model):
+class Location(db.Model):
     __tablename__ = "location"
 
     id = Column(BigInteger, primary_key=True)

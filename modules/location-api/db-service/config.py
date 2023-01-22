@@ -62,13 +62,11 @@ EXPORT_CONFIGS: List[Type[BaseConfig]] = [
 ]
 config_by_name = {cfg.CONFIG_NAME: cfg for cfg in EXPORT_CONFIGS}
 
-g_app = None
+app = Flask(__name__)
+db = SQLAlchemy()
 
 
 def create_app(env=None):
-    app = Flask(__name__)
     with app.app_context():
-        db = SQLAlchemy()
         app.config.from_object(config_by_name["dev"])
         db.init_app(app)
-        g_app = db
