@@ -4,7 +4,6 @@ from typing import List, Type
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, current_app
 
-db = SQLAlchemy()
 # db_service = LocationDBService
 
 DB_USERNAME = os.environ["DB_USERNAME"]
@@ -63,10 +62,13 @@ EXPORT_CONFIGS: List[Type[BaseConfig]] = [
 ]
 config_by_name = {cfg.CONFIG_NAME: cfg for cfg in EXPORT_CONFIGS}
 
+g_app = None
+
 
 def create_app(env=None):
     app = Flask(__name__)
     with app.app_context():
+        db = SQLAlchemy()
         app.config.from_object(config_by_name["dev"])
         db.init_app(app)
-        return app
+        g_app = db

@@ -4,7 +4,7 @@ from models import Location
 from typing import Dict
 from geoalchemy2.functions import ST_AsText, ST_Point
 # from app import db
-from config import db
+from config import db, g_app
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-db-app")
@@ -37,7 +37,7 @@ class LocationDBService:
         new_location.creation_time = location["creation_time"]
         new_location.coordinate = ST_Point(
             location["latitude"], location["longitude"])
-        db.session.add(new_location)
-        db.session.commit()
+        g_app.session.add(new_location)
+        g_app.session.commit()
 
         return new_location
