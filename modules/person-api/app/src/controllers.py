@@ -11,7 +11,7 @@ DATE_FORMAT = "%Y-%m-%d"
 api = Namespace("udaconnect.person", description="udaconnect person api")  # noqa
 
 
-@api.route("/persons")
+@api.route("/api/v1/persons")
 class PersonsResource(Resource):
     @accepts(schema=PersonSchema)
     @responds(schema=PersonSchema)
@@ -26,7 +26,7 @@ class PersonsResource(Resource):
         return persons
 
 
-@api.route("/persons/<person_id>")
+@api.route("/api/v1/persons/<person_id>")
 @api.param("person_id", "Fetch person from id", _in="query")
 class PersonResource(Resource):
     @responds(schema=PersonSchema)
