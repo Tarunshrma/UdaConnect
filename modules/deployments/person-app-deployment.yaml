@@ -54,10 +54,6 @@ metadata:
   labels:
     app: "udaconnect-persons-api"
 spec:
-  template:
-    metadata:
-      labels:
-        app: udaconnect-persons-api
   ports:
   - protocol: "TCP"
     port: 5001
