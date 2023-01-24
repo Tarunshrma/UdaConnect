@@ -15,7 +15,7 @@ spec:
         app: udaconnect-persons-api
     spec:
       containers:
-      - image: tarunshrma/udaconnect-person-app:0.0.4
+      - image: tarunshrma/udaconnect-person-app:0.0.5
         name: udaconnect-persons-api
         imagePullPolicy: IfNotPresent
         env:
