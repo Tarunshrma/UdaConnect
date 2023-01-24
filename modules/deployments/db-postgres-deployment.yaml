@@ -1,34 +1,4 @@
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: postgres-volume-location
-  labels:
-    type: local
-    app: postgres-location
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 256Mi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/mnt/data/location-db"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-location-pv-claim
-  labels:
-    app: postgres-location
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 256Mi    
----
-apiVersion: v1
 kind: Service
 metadata:
   name: postgres-location
