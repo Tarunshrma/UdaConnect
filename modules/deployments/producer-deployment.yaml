@@ -31,7 +31,7 @@ metadata:
 spec:
   ports:
   - protocol: "TCP"
-    port: 9092
+    port: 5000
     targetPort: 5000
   selector:
     app: "flask"
