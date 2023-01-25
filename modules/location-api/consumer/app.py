@@ -10,10 +10,13 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-api")
 
 
-TOPIC_NAME = 'location'
-KAFKA_SERVER = 'my-release-kafka.default.svc.cluster.local:9092'
-DB_SERVICE_URL = "location-db-service:5005"
-kafka_consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=KAFKA_SERVER)
+TOPIC_NAME = os.environ["KAFKA_TOPIC"]
+KAFKA_CONSUMER_URL = os.environ["KAFKA_CONSUMER_URL"]
+DB_SERVICE_URL = os.environ["DB_SERVICE_URL"]
+
+
+kafka_consumer = KafkaConsumer(
+    TOPIC_NAME, bootstrap_servers=KAFKA_CONSUMER_URL)
 
 
 def send_to_location_db_service(location_message):

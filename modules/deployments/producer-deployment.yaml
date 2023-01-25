@@ -17,8 +17,20 @@ spec:
     spec:
       containers:
         - name: "location-api-producer"
-          image: tarunshrma/udaconnect-location-producer:0.0.1
+          image: tarunshrma/udaconnect-location-producer:0.0.2
           imagePullPolicy: IfNotPresent
+          env:
+          - name: KAFKA_TOPIC
+            valueFrom:
+              configMapKeyRef:
+                name: app-location-map
+                key: KAFKA_TOPIC
+          - name: KAFKA_SERVER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: app-location-map
+                key: KAFKA_SERVER_URL
+
 
 ---
 apiVersion: "v1"

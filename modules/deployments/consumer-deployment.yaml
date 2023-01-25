@@ -17,5 +17,21 @@ spec:
     spec:
       containers:
       - name: "location-api-consumer"
-        image: tarunshrma/udaconnect-location-consumer:0.0.1
+        image: tarunshrma/udaconnect-location-consumer:0.0.2
         imagePullPolicy: IfNotPresent
+        env:
+        - name: KAFKA_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: KAFKA_TOPIC
+        - name: KAFKA_CONSUMER_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: KAFKA_CONSUMER_URL
+        - name: DB_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_SERVICE_URL
