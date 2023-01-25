@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: "location-api-consumer"
-        image: tarunshrma/udaconnect-location-consumer:0.0.2
+        image: tarunshrma/udaconnect-location-consumer:0.0.3
         imagePullPolicy: IfNotPresent
         env:
         - name: KAFKA_TOPIC

@@ -1,6 +1,8 @@
 from kafka import KafkaConsumer
 import json
 import logging
+import os
+
 
 import grpc
 import location_data_pb2

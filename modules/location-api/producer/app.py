@@ -1,5 +1,7 @@
 import json
 import logging
+import os
+
 
 from kafka import KafkaProducer
 from flask import Flask, jsonify, request, Response
