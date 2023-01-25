@@ -5,5 +5,9 @@ data:
   DB_NAME: "db_location"
   DB_HOST: "postgres-location"
   DB_PORT: "5432"
+  KAFKA_TOPIC: "location"
+  KAFKA_SERVER_URL: "my-release-kafka-0.my-release-kafka-headless.default.svc.cluster.local:9092"
+  KAFKA_CONSUMER_URL: "my-release-kafka.default.svc.cluster.local:9092"
+  DB_SERVICE_URL: "location-db-service:5005"
 metadata:
   name: app-location-map

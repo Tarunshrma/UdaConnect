@@ -58,6 +58,7 @@ spec:
   - protocol: "TCP"
     port: 5002
     targetPort: 5002
+    nodePort: 30003
   selector:
     app: "udaconnect-connetion-api"
   type: "NodePort"

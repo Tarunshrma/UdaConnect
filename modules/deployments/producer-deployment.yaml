@@ -16,9 +16,9 @@ spec:
         app: "location-api-producer"
     spec:
       containers:
-      - name: "location-api-producer"
-        image: tarunshrma/udaconnect-location-producer:0.0.1
-        imagePullPolicy: IfNotPresent
+        - name: "location-api-producer"
+          image: tarunshrma/udaconnect-location-producer:0.0.1
+          imagePullPolicy: IfNotPresent
 
 ---
 apiVersion: "v1"
@@ -30,10 +30,10 @@ metadata:
     app: "location-api-producer"
 spec:
   ports:
-  - protocol: "TCP"
-    port: 5000
-    targetPort: 5000
+    - protocol: "TCP"
+      port: 5000
+      targetPort: 5000
+      nodePort: 30001
   selector:
     app: "location-api-producer"
   type: "NodePort"
-
