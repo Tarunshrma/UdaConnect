@@ -21,7 +21,7 @@ kafka_producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
 
 @app.route('/health')
 def health():
-    return jsonify({'response': 'Hello World!'})
+    return jsonify({'response': 'Healthy'})
 
 
 @app.route('/api/v1/locations', methods=['POST'])
