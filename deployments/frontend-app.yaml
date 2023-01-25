@@ -31,7 +31,7 @@ spec:
         service: udaconnect-app
     spec:
       containers:
-      - image: tarunshrma/udaconnect-app:latest	
+      - image: tarunshrma/udaconnect-frontend:0.0.1
         name: udaconnect-app
         imagePullPolicy: Never
         resources:
