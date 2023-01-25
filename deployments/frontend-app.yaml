@@ -33,7 +33,7 @@ spec:
       containers:
       - image: tarunshrma/udaconnect-frontend:0.0.1
         name: udaconnect-app
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             memory: "128Mi"
