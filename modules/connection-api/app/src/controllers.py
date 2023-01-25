@@ -12,7 +12,7 @@ DATE_FORMAT = "%Y-%m-%d"
 api = Namespace("UdaConnect", description="Connections Api's.")  # noqa
 
 
-@api.route("/persons/<person_id>/connection")
+@api.route("/v1/persons/<person_id>/connection")
 @api.param("start_date", "Lower bound of date range", _in="query")
 @api.param("end_date", "Upper bound of date range", _in="query")
 @api.param("distance", "Proximity to a given user in meters", _in="query")

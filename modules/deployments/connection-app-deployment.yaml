@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: udaconnect-connetion-api
+  name: udaconnect-connetion-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udaconnect-connetion-api
+  template:
+    metadata:
+      labels:
+        app: udaconnect-connetion-api
+    spec:
+      containers:
+      - image: tarunshrma/udaconnect-connection-app:0.0.1
+        name: udaconnect-connetion-api
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-location-secret
+              key: DB_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_NAME
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_PORT
+
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: udaconnect-connetion-api
+  namespace: "default"
+  labels:
+    app: "udaconnect-connetion-api"
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 5002
+    targetPort: 5002
+  selector:
+    app: "udaconnect-connetion-api"
+  type: "NodePort"
