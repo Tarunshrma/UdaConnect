@@ -1,22 +1,22 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "flask"
+  name: "location-api-producer"
   namespace: "default"
   labels:
-    app: "flask"
+    app: "location-api-producer"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "flask"
+      app: "location-api-producer"
   template:
     metadata:
       labels:
-        app: "flask"
+        app: "location-api-producer"
     spec:
       containers:
-      - name: "flask"
+      - name: "location-api-producer"
         image: tarunshrma/udaconnect-location-producer:0.0.1
         imagePullPolicy: IfNotPresent
 
@@ -24,16 +24,16 @@ spec:
 apiVersion: "v1"
 kind: "Service"
 metadata:
-  name: "flask-service"
+  name: "location-api-producer"
   namespace: "default"
   labels:
-    app: "flask"
+    app: "location-api-producer"
 spec:
   ports:
   - protocol: "TCP"
     port: 5000
     targetPort: 5000
   selector:
-    app: "flask"
+    app: "location-api-producer"
   type: "NodePort"
 
