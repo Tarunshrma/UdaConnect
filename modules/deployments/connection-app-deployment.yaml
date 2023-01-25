@@ -15,7 +15,7 @@ spec:
         app: udaconnect-connetion-api
     spec:
       containers:
-      - image: tarunshrma/udaconnect-connection-app:0.0.1
+      - image: tarunshrma/udaconnect-connection-app:0.0.2
         name: udaconnect-connetion-api
         imagePullPolicy: IfNotPresent
         env:
