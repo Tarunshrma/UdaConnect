@@ -32,4 +32,5 @@ class ConnectionDataResource(Resource):
             end_date=end_date,
             meters=distance,
         )
-        return
+
+        return results
