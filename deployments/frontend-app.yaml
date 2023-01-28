@@ -1,10 +1,10 @@
-apiVersion: v1
-kind: Service
+apiVersion: "v1"
+kind: "Service"
 metadata:
-  name: udaconnect-app
+  name: "udaconnect-app"
   namespace: "default"
   labels:
-    app: udaconnect-app
+    app: "udaconnect-app"
 spec:
   ports:
   - protocol: "TCP"
@@ -12,29 +12,29 @@ spec:
     targetPort: 3000
     nodePort: 30000
   selector:
-    app: udaconnect-app
-  type: NodePort
+    app: "udaconnect-app"
+  type: "NodePort"
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: "apps/v1"
+kind: "Deployment"
 metadata:
   labels:
-    app: udaconnect-app
-  name: udaconnect-app
+    app: "udaconnect-app"
+  name: "udaconnect-app"
   namespace: "default"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: udaconnect-app
+      app: "udaconnect-app"
   template:
     metadata:
       labels:
-        app: udaconnect-app
+        app: "udaconnect-app"
     spec:
       containers:
       - image: tarunshrma/udaconnect-frontend:0.0.1
-        name: udaconnect-app
+        name: "udaconnect-app"
         imagePullPolicy: IfNotPresent
         resources:
           requests:
