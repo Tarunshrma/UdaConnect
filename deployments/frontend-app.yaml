@@ -36,11 +36,11 @@ spec:
       - image: tarunshrma/udaconnect-frontend:0.0.1
         name: "udaconnect-app"
         imagePullPolicy: IfNotPresent
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "64m"
-          limits:
-            memory: "256Mi"
-            cpu: "256m"
+        # resources:
+        #   requests:
+        #     memory: "128Mi"
+        #     cpu: "64m"
+        #   limits:
+        #     memory: "256Mi"
+        #     cpu: "256m"
       restartPolicy: Always
