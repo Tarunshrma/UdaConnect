@@ -1,0 +1,88 @@
+openapi: "3.0.0"
+info:
+  title: UdaConnect Connections API
+  description: Connections Api's
+  version: "1.0.0"
+servers:
+  - url: /
+paths:
+  /v1/persons/{person_id}/connection:
+    get:
+      parameters:
+        - name: person_id
+          in: path
+          description: Id of the person for which the connection is being queried
+          required: true
+          schema:
+            type: integer
+        - name: start_date
+          in: query
+          description: Lower bound of date range
+          required: true
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          description: Upper bound of date range
+          required: true
+          schema:
+            type: string
+        - name: distance
+          in: query
+          description: Proximity to a given user in meters
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: List of Connections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConnectionSchema'
+      description: Retrieve Connections by person_id
+components:
+  schemas:
+    LocationSchema:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Location ID
+        person_id:
+          type: integer
+          description: Person ID
+        longitude:
+          type: string
+          description: Longitude
+        latitude:
+          type: string
+          description: Latitude
+        creation_time:
+          type: string
+          format: date-time
+          description: Creation time of location
+    PersonSchema:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Person ID
+        first_name:
+          type: string
+          description: First name
+        last_name:
+          type: string
+          description: Last name
+        company_name:
+          type: string
+          description: Company name
+    ConnectionSchema:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/LocationSchema'
+        person:
+          $ref: '#/components/schemas/PersonSchema'
