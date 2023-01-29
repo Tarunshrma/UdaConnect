@@ -5,7 +5,7 @@ import os
 
 from kafka import KafkaProducer
 from flask import Flask, jsonify, request, Response
-from flask_restx import Resource, Api, Namespace
+from flask_restx import Resource, Api, Namespace, reqparse
 from flask_accepts import accepts, responds
 from schema import LocationSchema
 
@@ -25,13 +25,24 @@ KAFKA_SERVER = os.environ["KAFKA_SERVER_URL"]
 kafka_producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
 
 
-@api.route('/health')
+@api.route('/api/v1/health')
 class HealthResource(Resource):
     def get(self):
         return jsonify({'response': 'Healthy'})
 
 
-@api.route('/locations')
+parser = reqparse.RequestParser()
+parser.add_argument('person_id', type=int, help='Person Id', required=True)
+parser.add_argument('creation_time', type=str,
+                    help='Creation Time', required=True)
+parser.add_argument('latitude', type=str,
+                    help='Location Latitude', required=True)
+parser.add_argument('longitude', type=str,
+                    help='Location Longitude', required=True)
+
+
+@api.doc(parser=parser)
+@api.route('/api/v1/locations')
 class LocationsResource(Resource):
     @accepts(schema=LocationSchema)
     @responds(201, 'Location Created')
