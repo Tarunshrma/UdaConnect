@@ -32,13 +32,13 @@ class HealthResource(Resource):
 
 
 parser = reqparse.RequestParser()
-parser.add_argument('person_id', type=int, help='Person Id', required=True)
+parser.add_argument('person_id', type=int, help='1', required=True)
 parser.add_argument('creation_time', type=str,
-                    help='Creation Time', required=True)
+                    help='2020-07-07T10:37:06', required=True)
 parser.add_argument('latitude', type=str,
-                    help='Location Latitude', required=True)
+                    help='-122.290883', required=True)
 parser.add_argument('longitude', type=str,
-                    help='Location Longitude', required=True)
+                    help='37.55363', required=True)
 
 
 @api.doc(parser=parser)
