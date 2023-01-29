@@ -1,0 +1,46 @@
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "udaconnect-app"
+  namespace: "default"
+  labels:
+    app: "udaconnect-app"
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 3000
+    targetPort: 3000
+    nodePort: 30000
+  selector:
+    app: "udaconnect-app"
+  type: "NodePort"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  labels:
+    app: "udaconnect-app"
+  name: "udaconnect-app"
+  namespace: "default"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "udaconnect-app"
+  template:
+    metadata:
+      labels:
+        app: "udaconnect-app"
+    spec:
+      containers:
+      - image: tarunshrma/udaconnect-frontend:0.0.1
+        name: "udaconnect-app"
+        imagePullPolicy: IfNotPresent
+        # resources:
+        #   requests:
+        #     memory: "128Mi"
+        #     cpu: "64m"
+        #   limits:
+        #     memory: "256Mi"
+        #     cpu: "256m"
+      restartPolicy: Always

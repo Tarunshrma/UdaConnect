@@ -1,5 +1,7 @@
 import json
 import logging
+import os
+
 
 from kafka import KafkaProducer
 from flask import Flask, jsonify, request, Response
@@ -10,8 +12,10 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-api")
 
-TOPIC_NAME = 'location'
-KAFKA_SERVER = 'my-release-kafka-0.my-release-kafka-headless.default.svc.cluster.local:9092'
+TOPIC_NAME = os.environ["KAFKA_TOPIC"]
+KAFKA_SERVER = os.environ["KAFKA_SERVER_URL"]
+
+
 kafka_producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
 
 # @app.before_request

@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "473f92e0-155d-44e8-9bf8-efda0e28a01d",
+		"name": "Udaconnect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post Person Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\":\"Sanchit\",\n    \"last_name\":\"Sharma\",\n    \"company_name\":\"Seccurrency\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://146.190.34.54:30002/api/v1/persons",
+					"protocol": "http",
+					"host": [
+						"146",
+						"190",
+						"34",
+						"54"
+					],
+					"port": "30002",
+					"path": [
+						"api",
+						"v1",
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Connections",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://146.190.34.54:30003/api/v1/persons/2/connection?start_date=2020-01-01&end_date=2020-12-30&distance=5",
+					"protocol": "http",
+					"host": [
+						"146",
+						"190",
+						"34",
+						"54"
+					],
+					"port": "30003",
+					"path": [
+						"api",
+						"v1",
+						"persons",
+						"2",
+						"connection"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2020-01-01"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-12-30"
+						},
+						{
+							"key": "distance",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://146.190.34.54:30002/api/v1/persons/1",
+					"protocol": "http",
+					"host": [
+						"146",
+						"190",
+						"34",
+						"54"
+					],
+					"port": "30002",
+					"path": [
+						"api",
+						"v1",
+						"persons",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Person",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://146.190.34.54:30002/api/v1/persons",
+					"protocol": "http",
+					"host": [
+						"146",
+						"190",
+						"34",
+						"54"
+					],
+					"port": "30002",
+					"path": [
+						"api",
+						"v1",
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Person API Health Check",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\":\"Tarun\",\n    \"last_name\":\"Sharma\",\n    \"company_name\":\"Seccurrency\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://146.190.34.54:30002/health",
+					"protocol": "http",
+					"host": [
+						"146",
+						"190",
+						"34",
+						"54"
+					],
+					"port": "30002",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Location API Health Check Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\":\"Tarun\",\n    \"last_name\":\"Sharma\",\n    \"company_name\":\"Seccurrency\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://146.190.34.54:30001/health",
+					"protocol": "http",
+					"host": [
+						"146",
+						"190",
+						"34",
+						"54"
+					],
+					"port": "30001",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Location Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"person_id\":2,\n    \"creation_time\":\"2020-01-04\",\n    \"latitude\":\"222.222\",\n    \"longitude\":\"334.334\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://146.190.34.54:30001/api/v1/locations",
+					"protocol": "http",
+					"host": [
+						"146",
+						"190",
+						"34",
+						"54"
+					],
+					"port": "30001",
+					"path": [
+						"api",
+						"v1",
+						"locations"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

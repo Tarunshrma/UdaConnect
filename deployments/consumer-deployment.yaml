@@ -1,0 +1,37 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "location-api-consumer"
+  namespace: "default"
+  labels:
+    app: "location-api-consumer"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "location-api-consumer"
+  template:
+    metadata:
+      labels:
+        app: "location-api-consumer"
+    spec:
+      containers:
+      - name: "location-api-consumer"
+        image: tarunshrma/udaconnect-location-consumer:0.0.3
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: KAFKA_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: KAFKA_TOPIC
+        - name: KAFKA_CONSUMER_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: KAFKA_CONSUMER_URL
+        - name: DB_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-location-map
+              key: DB_SERVICE_URL

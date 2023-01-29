@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title: udaconnect person api
+  version: 1.0.0
+paths:
+  /v1/persons:
+    post:
+      summary: Create a new person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '201':
+          description: Successfully created a new person
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+    get:
+      summary: Retrieve all persons
+      responses:
+        '200':
+          description: Successfully retrieved all persons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+  /v1/persons/{person_id}:
+    get:
+      summary: Retrieve person by id
+      parameters:
+        - name: person_id
+          in: path
+          required: true
+          description: Fetch person from id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved person
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        # properties of the Person model
