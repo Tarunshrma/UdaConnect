@@ -18,24 +18,16 @@ parser.add_argument('company_name', type=str,
                     help='ABC Company', required=True)
 
 
-@api.doc(parser=parser)
 @api.route("/v1/persons")
-class PostPersonResource(Resource):
+class PersonsResource(Resource):
     @accepts(schema=PersonSchema)
     @responds(schema=PersonSchema)
+    @api.doc(parser=parser)
     def post(self) -> Person:
         payload = request.get_json()
         new_person: Person = PersonService.create(payload)
         return new_person
 
-    @responds(schema=PersonSchema, many=True)
-    def get(self) -> List[Person]:
-        persons: List[Person] = PersonService.retrieve_all()
-        return persons
-
-
-@api.route("/v1/persons")
-class PersonsResource(Resource):
     @responds(schema=PersonSchema, many=True)
     def get(self) -> List[Person]:
         persons: List[Person] = PersonService.retrieve_all()
