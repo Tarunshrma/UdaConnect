@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: "location-api-producer"
-          image: tarunshrma/udaconnect-location-producer:0.0.3
+          image: tarunshrma/udaconnect-location-producer:0.0.17
           imagePullPolicy: IfNotPresent
           env:
           - name: KAFKA_TOPIC

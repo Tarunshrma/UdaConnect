@@ -1,0 +1,8 @@
+
+I have refacatored the monolithic udaconnect app by breaking it down into different services, each has it's unique purpose. The services are below:
+
+- **location-api-producer:** This is rest api which will accept the location data from exteral source such as mobile device. Once data is recieved, it push the location data to **Kafka queue** and it's job is over. This way location producer will be able to handle large amount of data as this is light weight service which is just active as data reciever and not performing any operation on it.  
+- **location-api-consumer**: Another service which is ready to listen any incoming data on **Kafka queue**, once data is pushed to queue, this service will fetch the data and call another service i.e. **location-db-app** over `grpc` protocol.
+- **location-db-app**: This service is **grpc** server which will recieve the location data from **location-api-consumer** and store it in **location database**. As this is internal interfacing service I choose it to be `grpc` which will make it more efficient and faster.Also any kind of non-suuported location data will be ignored (should be logged as error) here as `grpc` is strongly typed api service.
+- **udaconnect-persons-api**: This is very simple **rest api**, that will intereact with **person database** and expose endpoint to store and fetch person data.
+- **udaconnect-connetion-api**: This is again **rest api** that expose a single endpoint to fetch connection data. This api will fetch data from both **location database** and **person database**
