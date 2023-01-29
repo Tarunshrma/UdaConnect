@@ -36,8 +36,8 @@ def health():
 
 @app.route('/api/v1/locations', methods=['POST'])
 @accepts(schema=LocationSchema)
-@app.response(201, 'Location Created')
-@app.response(400, 'Invalid Location Data')
+@responds(201, 'Location Created')
+@responds(400, 'Invalid Location Data')
 def locations():
     request_body = request.json
     kafka_data = json.dumps(request_body).encode()
