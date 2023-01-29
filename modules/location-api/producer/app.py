@@ -5,12 +5,15 @@ import os
 
 from kafka import KafkaProducer
 from flask import Flask, jsonify, request, Response
-from flask_restx import Namespace
+from flask_restx import Namespace, Api
 from flask_accepts import accepts, responds
 from schema import LocationSchema
 
 app = Flask(__name__)
-api = Namespace("udaconnect.location", description="udaconnect location api")  # noqa
+
+namespace = Namespace("udaconnect.location", description="udaconnect location api")  # noqa
+api = Api(app, title="UdaConnect Location API")
+api.add_namespace(namespace, path=f"/")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-api")
