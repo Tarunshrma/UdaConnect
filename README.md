@@ -18,6 +18,8 @@ I have refacatored the monolithic udaconnect app by breaking it down into differ
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/) - API webserver
 * [SQLAlchemy](https://www.sqlalchemy.org/) - Database ORM
 * [PostgreSQL](https://www.postgresql.org/) - Relational database
+* [Kafka](https://kafka.apache.org/) - Message broker to ingest location data
+* [gRPC](https://grpc.io/) - gRPC for efficient inter-service communication.
 * [PostGIS](https://postgis.net/) - Spatial plug-in for PostgreSQL enabling geographic queries]
 * [Vagrant](https://www.vagrantup.com/) - Tool for managing virtual deployed environments
 * [VirtualBox](https://www.virtualbox.org/) - Hypervisor allowing you to run multiple operating systems
