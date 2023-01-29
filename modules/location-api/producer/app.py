@@ -27,7 +27,7 @@ kafka_producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
 
 @api.route('/health')
 class Health(Resource):
-    def health():
+    def health(self):
         return jsonify({'response': 'Healthy'})
 
 
@@ -36,7 +36,7 @@ class Locatations(Resource):
     @accepts(schema=LocationSchema)
     @responds(201, 'Location Created')
     @responds(400, 'Invalid Location Data')
-    def locations():
+    def locations(self):
         request_body = request.json
         kafka_data = json.dumps(request_body).encode()
         kafka_producer.send(TOPIC_NAME, kafka_data)
