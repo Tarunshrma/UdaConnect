@@ -5,9 +5,12 @@ import os
 
 from kafka import KafkaProducer
 from flask import Flask, jsonify, request, Response
-
+from flask_restx import Namespace
+from flask_accepts import accepts, responds
+from schema import LocationSchema
 
 app = Flask(__name__)
+api = Namespace("udaconnect.location", description="udaconnect location api")  # noqa
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-api")
@@ -23,12 +26,15 @@ kafka_producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
 #     # Set up a Kafka producer
 
 
-@app.route('/health')
+@api.route("/health")
 def health():
     return jsonify({'response': 'Healthy'})
 
 
-@app.route('/api/v1/locations', methods=['POST'])
+@api.route('/api/v1/locations', methods=['POST'])
+@accepts(schema=LocationSchema)
+@api.response(201, 'Location Created')
+@api.response(400, 'Invalid Location Data')
 def locations():
     request_body = request.json
     kafka_data = json.dumps(request_body).encode()
@@ -38,7 +44,7 @@ def locations():
     logger.info(
         f"location data to be submitted: {request_body}")
 
-    return Response(status=202)
+    return Response(status=201)
 
 
 # if __name__ == '__main__':
