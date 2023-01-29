@@ -5,15 +5,15 @@ import os
 
 from kafka import KafkaProducer
 from flask import Flask, jsonify, request, Response
-from flask_restx import Namespace, Api
+from flask_restx import Resource, Api
 from flask_accepts import accepts, responds
 from schema import LocationSchema
 
 app = Flask(__name__)
 api = Api(app, title="UdaConnect Location API")
 
-locationApi = Namespace("udaconnect.location", description="udaconnect location api")  # noqa
-api.add_namespace(locationApi, path=f"/")
+# namespace = Namespace("udaconnect.location", description="udaconnect location api")  # noqa
+# api.add_namespace(namespace, path=f"/")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-location-api")
@@ -29,12 +29,13 @@ kafka_producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
 #     # Set up a Kafka producer
 
 
-@locationApi.route("/health")
-def health():
-    return jsonify({'response': 'Healthy'})
+@api.route('/health')
+class Health(Resource):
+    def health():
+        return jsonify({'response': 'Healthy'})
 
 
-@locationApi.route('/api/v1/locations', methods=['POST'])
+@app.route('/api/v1/locations', methods=['POST'])
 @accepts(schema=LocationSchema)
 @responds(201, 'Location Created')
 @responds(400, 'Invalid Location Data')
